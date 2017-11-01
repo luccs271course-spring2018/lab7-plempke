@@ -16,6 +16,7 @@ public class LinkedStack<E> implements IStack<E> {
   public E push(final E obj)
   {
     // TODO
+    // DONE
     top = new Node<>(obj, top);
     return obj;
   }
@@ -24,6 +25,7 @@ public class LinkedStack<E> implements IStack<E> {
   public E peek()
   {
     // TODO
+    // DONE
     if (isEmpty())
     {
       throw new NoSuchElementException();
@@ -35,6 +37,7 @@ public class LinkedStack<E> implements IStack<E> {
   public E pop()
   {
     // TODO
+    // DONE
     if (isEmpty()) {
       throw new NoSuchElementException();
     }
@@ -49,6 +52,8 @@ public class LinkedStack<E> implements IStack<E> {
   public boolean isEmpty()
   {
     // TODO
+    
+    //DONE
     if (top == null)
       {return true;}
     else
@@ -58,14 +63,40 @@ public class LinkedStack<E> implements IStack<E> {
   @Override
   public List<E> asList()
   {
-    // TODO implement using an ArrayList preallocated with the right
-    List<E> preallocatedList = new ArrayList<E>();
-    while (top != null)
-    {
-      preallocatedList.add(top.data);
-      top = top.next;
-    }
-    // TODO add any instance variable(s) required to support this
-    return preallocatedList;
+    final ArrayList<E> result = new ArrayList<>(size);
+    populateList(curr.next, result); //DONE replace null with the right reference
+    return result;
   }
+  
+  private void populateList(final Node<E> curr, final List<E> result) {
+    //TODO recursively populate the list in the desired order
+    //DONE
+    if(curr==null){
+      return; 
+    }
+    else {
+      result.add(curr.data);
+      populateList(curr.next, result)
+    }
+  }
+  @Override
+  public List<E> result = new ArrayList<>(size);
+  populateFifoList(curr.next, result); //TODO --> DONE replace null with the right reference
+  return result;
+  }
+  
+  private void populateFifoList(final Node<E> curr, final List<E> result) {
+    //TODO recursively populate the list in the desired order
+    //DONE
+    if(curr ==null) {
+      return;
+    }
+    else {
+      result.add(0,curr.data);
+      populateFifoList(curr.next,result);
+    }
+    
+  }
+
+
 }
